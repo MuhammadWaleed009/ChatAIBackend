@@ -40,10 +40,10 @@ cd aichat-backend
 Create a `.env` file in the project root with the following variables:
 
 ```
-DATABASE_URL=postgresql://chatuser:chatpass@db:5432/chathistory
-SECRET_KEY=your_flask_secret
-JWT_SECRET_KEY=your_jwt_secret
-GEMINI_API_KEY=your_gemini_api_key   # Optional, only needed for real Gemini responses
+DATABASE_URL=postgresql://<db_user>:<db_password>@<db_host>:<db_port>/<db_name>
+SECRET_KEY=<your_flask_secret>
+JWT_SECRET_KEY=<your_jwt_secret>
+GEMINI_API_KEY=<your_gemini_api_key> # Optional, only needed for real Gemini responses
 ```
 
 ### 3. Build and Run with Docker
@@ -53,7 +53,6 @@ docker-compose up --build
 ```
 
 - The backend will be available at `http://localhost:5000`
-- The PostgreSQL database will be available internally as `db:5432`
 
 ### 4. Database Migrations
 
@@ -70,5 +69,20 @@ flask db upgrade
 - **Rate Limit**: Each user can send up to 20 messages per day.
 - **Mock Responses**: GPT and Claude always return mock responses. Gemini uses the real API if `GEMINI_API_KEY` is set, otherwise returns mock responses.
 - **CORS**: Enabled for all origins.
+
+---
+
+## Future Improvements
+
+- **Conversation Naming**: Automatically assign a name to each conversation, using a keyword or summary from the first prompt (similar to how GPT does it).
+- **User Profile Management**: Allow users to update their email, password, and view usage statistics.
+- **Admin Dashboard**: Add an admin interface for monitoring users, conversations, and system health.
+- **Model Selection UI**: Let users choose between available AI models with descriptions and usage limits.
+- **Conversation Export**: Allow users to export their chat history as PDF or text files.
+- **WebSocket Support**: Enable real-time streaming of AI responses for a more interactive chat experience.
+- **Multi-language Support**: Add localization for different languages in API responses and UI.
+- **Analytics & Insights**: Provide users with insights about their chat activity and most discussed topics.
+- **Enhanced Rate Limiting**: Make rate limits configurable per user or per plan (for future paid tiers).
+- **Plug-in System**: Allow integration of additional AI models or third-party services via plug-ins.
 
 ---
